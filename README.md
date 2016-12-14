@@ -1,4 +1,8 @@
-# Proyecto ECMAScript 2015 (ES6)
+# Página Web sobre ECMAScript 2015 (ES6)
+
+## Proyecto de Tecnologías Web con JavaScript 2016B
+
+### Integrantes: Edison Chung, Fabrizio Ramírez
 
 Página web con tutorial sobre ECMAScript 2015 (ES6).
 

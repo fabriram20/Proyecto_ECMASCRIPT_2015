@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ES6: var vs let vs const">
+  <title>Proyecto - Edison Chung - Fabrizio Ramírez</title>
+
+  <!-- Pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/pure-min.css">
+  <link rel="stylesheet" href="side-menu.css">
+
+</head>
+
+<body>
+
+  <div id="layout">
+    <a href="#menu" id="menuLink" class="menu-link">
+      <span></span>
+    </a>
+
+    <div id="menu">
+      <div class="pure-menu">
+        <a class="pure-menu-heading" href="index.html">ES6</a>
+
+        <ul class="pure-menu-list">
+          <li class="pure-menu-item"><a href="varletconst.html" class="pure-menu-link">var vs let / const</a></li>
+          <li class="pure-menu-item"><a href="blocks.html" class="pure-menu-link">IIFEs ahora Blocks</a></li>
+          <li class="pure-menu-item pure-menu-selected"><a href="arrow.html" class="pure-menu-link">Arrow Functions</a></li>
+          <li class="pure-menu-item"><a href="strings.html" class="pure-menu-link">Strings .includes() .repeat()</a></li>
+          <li class="pure-menu-item"><a href="literals.html" class="pure-menu-link">Template literals</a></li>
+          <li class="pure-menu-item"><a href="arrays.html" class="pure-menu-link">Destructuring arrays</a></li>
+          <li class="pure-menu-item"><a href="objects.html" class="pure-menu-link">Destructuring objects</a></li>
+          <li class="pure-menu-item"><a href="modules.html" class="pure-menu-link">Modules export and import</a></li>
+          <li class="pure-menu-item"><a href="parameters.html" class="pure-menu-link">Parameters</a></li>
+          <li class="pure-menu-item"><a href="spread.html" class="pure-menu-link">Spread Operator</a></li>
+          <li class="pure-menu-item"><a href="classes.html" class="pure-menu-link">Classes</a></li>
+          <li class="pure-menu-item"><a href="promises.html" class="pure-menu-link">Promises</a></li>
+          <li class="pure-menu-item"><a href="getset.html" class="pure-menu-link">Getter and Setter</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="main">
+      <div class="header">
+        <h1>ECMAScript 2015 (ES6)</h1>
+        <h2>Edison Chung - Fabrizio Ramírez - Pure.css</h2>
+      </div>
+
+      <div class="content">
+        <h2 class="content-subhead">Arrow Functions (Funciones Flecha)</h2>
+        <p>Muchas veces se tienen funciones anidadas en las que se quiere preservar el contexto de <code>this</code> de su alcance léxico. Por ejemplo:</p>
+        <pre>
+          <code>
+            function Person(name) {
+              this.name = name;
+            }
+            Person.prototype.prefixName = function (arr) {
+              return arr.map(function (character) {
+                return this.name + character; // Cannot read property 'name' of undefined
+              });
+            };
+          </code>
+        </pre>
+        <p>Una solución común a este problema es almacenar el contexto de <code>this</code> usando una variable:</p>
+        <pre>
+          <code>
+            function Person(name) {
+              this.name = name;
+            }
+            Person.prototype.prefixName = function (arr) {
+            var that = this; // Store the context of this
+              return arr.map(function (character) {
+                return that.name + character;
+              });
+            };
+          </code>
+        </pre>
+        <p>También se puede pasar en el contexto apropiado de <code>this</code>:</p>
+        <pre>
+          <code>
+            function Person(name) {
+              this.name = name;
+            }
+            Person.prototype.prefixName = function (arr) {
+              return arr.map(function (character) {
+                return this.name + character;
+              }, this);
+            };
+          </code>
+        </pre>
+        <p>Así como enlazar el contexto:</p>
+        <pre>
+          <code>
+            function Person(name) {
+              this.name = name;
+            }
+            Person.prototype.prefixName = function (arr) {
+              return arr.map(function (character) {
+                return this.name + character;
+              }.bind(this));
+            };
+          </code>
+        </pre>
+        <p>Utilizando <b>Arrow Functions</b>, el valor léxico de <code>this</code> no se oculta y se puede reescribir lo anterior:</p>
+        <pre>
+          <code>
+            function Person(name) {
+              this.name = name;
+            }
+            Person.prototype.prefixName = function (arr) {
+              return arr.map(character => this.name + character);
+            };
+            </code>
+        </pre>
+        <p>Arrow Functions son también más concisas cuando se usan en expresiones de función que solo retornan un valor:</p>
+        <pre>
+          <code>
+            var squares = arr.map(function (x) { return x * x }); // Function Expression
+          </code>
+        </pre>
+        <pre>
+          <code>
+            const arr = [1, 2, 3, 4, 5];
+            const squares = arr.map(x => x * x); // Arrow Function for terser implementation
+          </code>
+        </pre>
+        
+        <h2 class="content-subhead">Mejores prácticas</h2>
+        <ul>
+          <li>Usar <b>Arrow Functions</b> cuando se necesita preservar el valor léxico de <code>this</code>.</li>
+          <li>Usar <b>Arrow Functions</b> en lugar de expresiones de función cuando sea posible.</li>
+        </ul>
+        
+        <br>
+        <a class="pure-button pure-button-primary" href="strings.html">Siguiente</a>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="ui.js"></script>
+
+</body>
+
+</html>

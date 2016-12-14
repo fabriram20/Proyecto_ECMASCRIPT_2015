@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ES6: var vs let vs const">
+  <title>Proyecto - Edison Chung - Fabrizio Ramírez</title>
+
+  <!-- Pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/pure-min.css">
+  <link rel="stylesheet" href="side-menu.css">
+
+</head>
+
+<body>
+
+  <div id="layout">
+    <a href="#menu" id="menuLink" class="menu-link">
+      <span></span>
+    </a>
+
+    <div id="menu">
+      <div class="pure-menu">
+        <a class="pure-menu-heading" href="index.html">ES6</a>
+
+        <ul class="pure-menu-list">
+          <li class="pure-menu-item"><a href="varletconst.html" class="pure-menu-link">var vs let / const</a></li>
+          <li class="pure-menu-item"><a href="blocks.html" class="pure-menu-link">IIFEs ahora Blocks</a></li>
+          <li class="pure-menu-item"><a href="arrow.html" class="pure-menu-link">Arrow Functions</a></li>
+          <li class="pure-menu-item"><a href="strings.html" class="pure-menu-link">Strings .includes() .repeat()</a></li>
+          <li class="pure-menu-item"><a href="literals.html" class="pure-menu-link">Template literals</a></li>
+          <li class="pure-menu-item"><a href="arrays.html" class="pure-menu-link">Destructuring arrays</a></li>
+          <li class="pure-menu-item"><a href="objects.html" class="pure-menu-link">Destructuring objects</a></li>
+          <li class="pure-menu-item"><a href="modules.html" class="pure-menu-link">Modules export and import</a></li>
+          <li class="pure-menu-item pure-menu-selected"><a href="parameters.html" class="pure-menu-link">Parameters</a></li>
+          <li class="pure-menu-item"><a href="spread.html" class="pure-menu-link">Spread Operator</a></li>
+          <li class="pure-menu-item"><a href="classes.html" class="pure-menu-link">Classes</a></li>
+          <li class="pure-menu-item"><a href="promises.html" class="pure-menu-link">Promises</a></li>
+          <li class="pure-menu-item"><a href="getset.html" class="pure-menu-link">Getter and Setter</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="main">
+      <div class="header">
+        <h1>ECMAScript 2015 (ES6)</h1>
+        <h2>Edison Chung - Fabrizio Ramírez - Pure.css</h2>
+      </div>
+
+      <div class="content">
+        <h2 class="content-subhead">Parámetros</h2>
+        <p>En ES5, se tienen varias maneras de manejar funciones que necesitan valores por defecto, argumentos indefinidos y parámetros nombrados. Con ES6, se puede lograr todo esto y más utilizando una sintaxis concisa.</p>
+        <h2 class="content-subhead">Parámetros por defecto (Default Parameters)</h2>
+        <pre>
+          <code>
+            function addTwoNumbers(x, y) {
+              x = x || 0;
+              y = y || 0;
+              return x + y;
+            }
+          </code>
+        </pre>
+        <p>En ES6, se pueden simplemente dar valores por defecto para los parámetros de una función:</p>
+        <pre>
+          <code>
+            function addTwoNumbers(x=0, y=0) {
+              return x + y;
+            }
+          </code>
+        </pre>
+        <pre>
+          <code>
+            addTwoNumbers(2, 4); // 6
+            addTwoNumbers(2); // 2
+            addTwoNumbers(); // 0
+          </code>
+        </pre>
+        <h2 class="content-subhead">Parámetros Rest</h2>
+        <p>En ES5, se manejaba un número infinito de argumentos de la siguiente manera:</p>
+        <pre>
+          <code>
+            function logArguments() {
+              for (var i=0; i < arguments.length; i++) {
+              console.log(arguments[i]);
+              }
+            }
+          </code>
+        </pre>
+        <p>Utilizando el operador <b>rest</b>, se puede pasar un número indefinido de argumentos.</p>
+        <pre>
+          <code>
+            function logArguments(...args) {
+              for (let arg of args) {
+                console.log(arg);
+              }
+            }
+          </code>
+        </pre>
+        <h2 class="content-subhead">Parámetros Nombrados (Named Parameters)</h2>
+        <p>Uno de los patrones en ES5 para manejar parámetros nombrados era usar el patrón <b>options object</b>, adoptado de jQuery.</p>
+        <pre>
+          <code>
+            function initializeCanvas(options) {
+              var height = options.height || 600;
+              var width  = options.width  || 400;
+              var lineStroke = options.lineStroke || 'black';
+            }
+          </code>
+        </pre>
+        <p>Se puede obtener la misma funcionalidad utilizando destructuración como un parámetro formal de una función:</p>
+        <pre>
+          <code>
+            function initializeCanvas(
+              { height=600, width=400, lineStroke='black'}) {
+                // Use variables height, width, lineStroke here
+            }
+          </code>
+        </pre>
+        <p>Si se quiere hacer el valor entero opcional, se puede destructurar un objeto vacío:</p>
+        <pre>
+          <code>
+            function initializeCanvas(
+              { height=600, width=400, lineStroke='black'} = {}) {
+              // ...
+              }
+          </code>
+        </pre>
+
+        <br>
+        <a class="pure-button pure-button-primary" href="spread.html">Siguiente</a>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="ui.js"></script>
+
+</body>
+
+</html>

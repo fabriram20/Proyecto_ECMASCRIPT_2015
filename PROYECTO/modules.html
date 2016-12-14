@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ES6: var vs let vs const">
+  <title>Proyecto - Edison Chung - Fabrizio Ramírez</title>
+
+  <!-- Pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/pure-min.css">
+  <link rel="stylesheet" href="side-menu.css">
+
+</head>
+
+<body>
+
+  <div id="layout">
+    <a href="#menu" id="menuLink" class="menu-link">
+      <span></span>
+    </a>
+
+    <div id="menu">
+      <div class="pure-menu">
+        <a class="pure-menu-heading" href="index.html">ES6</a>
+
+        <ul class="pure-menu-list">
+          <li class="pure-menu-item"><a href="varletconst.html" class="pure-menu-link">var vs let / const</a></li>
+          <li class="pure-menu-item"><a href="blocks.html" class="pure-menu-link">IIFEs ahora Blocks</a></li>
+          <li class="pure-menu-item"><a href="arrow.html" class="pure-menu-link">Arrow Functions</a></li>
+          <li class="pure-menu-item"><a href="strings.html" class="pure-menu-link">Strings .includes() .repeat()</a></li>
+          <li class="pure-menu-item"><a href="literals.html" class="pure-menu-link">Template literals</a></li>
+          <li class="pure-menu-item"><a href="arrays.html" class="pure-menu-link">Destructuring arrays</a></li>
+          <li class="pure-menu-item"><a href="objects.html" class="pure-menu-link">Destructuring objects</a></li>
+          <li class="pure-menu-item pure-menu-selected"><a href="modules.html" class="pure-menu-link">Modules export and import</a></li>
+          <li class="pure-menu-item"><a href="parameters.html" class="pure-menu-link">Parameters</a></li>
+          <li class="pure-menu-item"><a href="spread.html" class="pure-menu-link">Spread Operator</a></li>
+          <li class="pure-menu-item"><a href="classes.html" class="pure-menu-link">Classes</a></li>
+          <li class="pure-menu-item"><a href="promises.html" class="pure-menu-link">Promises</a></li>
+          <li class="pure-menu-item"><a href="getset.html" class="pure-menu-link">Getter and Setter</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="main">
+      <div class="header">
+        <h1>ECMAScript 2015 (ES6)</h1>
+        <h2>Edison Chung - Fabrizio Ramírez - Pure.css</h2>
+      </div>
+
+      <div class="content">
+        <h2 class="content-subhead">Módulos</h2>
+        <p>Antes de ES6, se usaban librerías como Browserify para crear módulos en el lado del cliente, y require en Node.js. Con ES6, ahora se pueden usar directamente módulos de todo tipo (AMD y CommonJs).</p>
+        <h2 class="content-subhead">Exportando en CommonJs</h2>
+        <pre>
+          <code>
+            module.exports = 1;
+            module.exports = { foo: 'bar' };
+            module.exports = ['foo', 'bar'];
+            module.exports = function bar () {};
+          </code>
+        </pre>
+        <h2 class="content-subhead">Exportando en ES6</h2>
+        <p>En ES6, se puede exportar de varias maneras. Se pueden realizar <b>exportaciones nombradas</b>:</p>
+        <pre>
+          <code>
+            export let name = 'David';
+            export let age  = 25;​​
+          </code>
+        </pre>
+        <p>Así como exportar una lista de objetos:</p>
+        <pre>
+          <code>
+            function sumTwo(a, b) {
+              return a + b;
+            }
+            function sumThree(a, b, c) {
+              return a + b + c;
+            }
+            export { sumTwo, sumThree };
+          </code>
+        </pre>
+        <p>Tambíen se pueden exportar funciones, objetos y valores (etc.) simplemente usando la palabra clave <code>export</code>:</p>
+        <pre>
+          <code>
+            export function sumTwo(a, b) {
+              return a + b;
+            }
+            export function sumThree(a, b, c) {
+              return a + b + c;
+            }
+          </code>
+        </pre>
+        <p>Finalmente, se pueden exportar enlaces por defecto:</p>
+        <pre>
+          <code>
+            function sumTwo(a, b) {
+              return a + b;
+            }
+            function sumThree(a, b, c) {
+              return a + b + c;
+            }
+            let api = {
+              sumTwo,
+              sumThree
+            };
+            export default api;
+            /* Que es lo mismo que
+            * export { api as default };
+            */
+          </code>
+        </pre>
+        <h2 class="content-subhead">Mejores Prácticas</h2>
+        <p>Siempre usar el método <code>export default</code> al <b>final</b> del módulo. Hace claro qué está siendo exportado, y ahorra tiempo buscando qué nombre se puso a cada valor exportado. Además, una práctica común en módulos CommonJS es exportar un solo valor u objeto. Siguiendo este paradigma, el código se vuelve fácilmente legible y se puede interpolar entre módulos CommonJS y ES6.</p>
+        <h2 class="content-subhead">Importando en ES6</h2>
+        <p>ES6 provee varias formas de importar. Se puede importar un archivo entero:</p>
+        <pre>
+          <code>
+            import 'underscore';
+          </code>
+        </pre>
+        <p>Nota: simplemente importar un archivo entero ejecuta todo el código al nivel más alto del archivo.</p>
+        <p>De manera similar a Python, se tienen importaciones nombradas:</p>
+        <pre>
+          <code>
+            import { sumTwo, sumThree } from 'math/addition';
+          </code>
+        </pre>
+        <p>También se pueden renombrar estas importaciones:</p>
+        <pre>
+          <code>
+            import {
+              sumTwo as addTwoNumbers,
+              sumThree as sumThreeNumbers
+            } from 'math/addition';
+          </code>
+        </pre>
+        <p>Además, se pueden importar todas las cosas (namespace import):</p>
+        <pre>
+          <code>
+            import * as util from 'math/addition';
+          </code>
+        </pre>
+        <p>Finalmente, se puede importar una lista de valores desde un módulo:</p>
+        <pre>
+          <code>
+            import * as additionUtil from 'math/addition';
+            const { sumTwo, sumThree } = additionUtil;
+          </code>
+        </pre>
+        <p>Importando desde el enlace por defecto de la siguiente manera:</p>
+        <pre>
+          <code>
+            import api from 'math/addition';
+            // Same as: import { default as api } from 'math/addition';
+          </code>
+        </pre>
+        <p>Mientras es mejor mantener las exportaciones simples, se pueden a veces mezclar importaciones por defecto e importaciones mezcladas si es necesario. Cuando se está exportando de la siguiente manera:</p>
+        <pre>
+          <code>
+            // foos.js
+            export { foo as default, foo1, foo2 };
+          </code>
+        </pre>
+        <p>Se pueden importar como:</p>
+        <pre>
+          <code>
+            import foo, { foo1, foo2 } from 'foos';
+          </code>
+        </pre>
+        <p>Cuando se importa un módulo exportado usando sintaxis commonjs (como React), se puede hacer:</p>
+        <pre>
+          <code>
+            import React from 'react';
+            const { Component, PropTypes } = React;
+          </code>
+        </pre>
+        <p>Y se puede simplificar más, usando:</p>
+        <pre>
+          <code>
+            import React, { Component, PropTypes } from 'react';
+          </code>
+        </pre>
+        <p>Nota: valores exportados son bindings, no referencias. Por lo tanto, al cambiar el binding de una variable en un módulo se afecta el valor dentro del módulo exportado. Evitar cambiar la interfaz pública de estos valores exportados.</p>
+        <br>
+        <a class="pure-button pure-button-primary" href="parameters.html">Siguiente</a>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="ui.js"></script>
+
+</body>
+
+</html>
